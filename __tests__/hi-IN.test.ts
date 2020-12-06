@@ -2,30 +2,24 @@ import { ToWords } from '../src/to-words';
 import cloneDeep from 'lodash/cloneDeep';
 
 const toWords = new ToWords({
-  localeCode: 'en-IN',
+  localeCode: 'hi-IN',
 });
 
 const testIntegers = [
-  [0, 'Zero'],
-  [137, 'One Hundred Thirty Seven'],
-  [700, 'Seven Hundred'],
-  [4680, 'Four Thousand Six Hundred Eighty'],
-  [63892, 'Sixty Three Thousand Eight Hundred Ninety Two'],
-  [792581, 'Seven Lakh Ninety Two Thousand Five Hundred Eighty One'],
-  [2741034, 'Twenty Seven Lakh Forty One Thousand Thirty Four'],
-  [86429753, 'Eight Crore Sixty Four Lakh Twenty Nine Thousand Seven Hundred Fifty Three'],
-  [975310864, 'Ninety Seven Crore Fifty Three Lakh Ten Thousand Eight Hundred Sixty Four'],
-  [9876543210, 'Nine Hundred Eighty Seven Crore Sixty Five Lakh Forty Three Thousand Two Hundred Ten'],
-  [98765432101, 'Nine Thousand Eight Hundred Seventy Six Crore Fifty Four Lakh Thirty Two Thousand One Hundred One'],
-  [987654321012, 'Ninety Eight Thousand Seven Hundred Sixty Five Crore Forty Three Lakh Twenty One Thousand Twelve'],
-  [
-    9876543210123,
-    'Nine Lakh Eighty Seven Thousand Six Hundred Fifty Four Crore Thirty Two Lakh Ten Thousand One Hundred Twenty Three',
-  ],
-  [
-    98765432101234,
-    'Ninety Eight Lakh Seventy Six Thousand Five Hundred Forty Three Crore Twenty One Lakh One Thousand Two Hundred Thirty Four',
-  ],
+  [0, 'शून्य'],
+  [137, 'एक सौ सैंतीस'],
+  [700, 'सात सौ'],
+  [4680, 'चार हज़ार छह सौ अस्सी'],
+  [63892, 'तिरसठ हज़ार आठ सौ बानवे'],
+  [792581, 'सात लाख बानवे हज़ार पांच सौ इक्यासी'],
+  [2741034, 'सत्ताईस लाख इकतालीस हज़ार चौंतीस'],
+  [86429753, 'आठ करोड़ चौंसठ लाख उनतीस हज़ार सात सौ तिरेपन'],
+  [975310864, 'सत्तानवे करोड़ तिरेपन लाख दस हज़ार आठ सौ चौंसठ'],
+  [9876543210, 'नौ सौ सतासी करोड़ पैंसठ लाख तैंतालीस हज़ार दो सौ दस'],
+  [98765432101, 'नौ हज़ार आठ सौ छिहत्तर करोड़ चौबन लाख बत्तीस हज़ार एक सौ एक'],
+  [987654321012, 'अट्ठानवे हज़ार सात सौ पैंसठ करोड़ तैंतालीस लाख इक्कीस हज़ार बारह'],
+  [9876543210123, 'नौ लाख सतासी हज़ार छह सौ चौबन करोड़ बत्तीस लाख दस हज़ार एक सौ तेईस'],
+  [98765432101234, 'अट्ठानवे लाख छिहत्तर हज़ार पांच सौ तैंतालीस करोड़ इक्कीस लाख एक हज़ार दो सौ चौंतीस'],
 ];
 
 describe('Test Integers with options = {}', () => {
@@ -40,7 +34,7 @@ testNegativeIntegers.map((row, i) => {
     return;
   }
   row[0] = -row[0];
-  row[1] = `Minus ${row[1]}`;
+  row[1] = `ऋण ${row[1]}`;
 });
 
 describe('Test Negative Integers with options = {}', () => {
@@ -51,7 +45,7 @@ describe('Test Negative Integers with options = {}', () => {
 
 const testIntegersWithCurrency = cloneDeep(testIntegers);
 testIntegersWithCurrency.map((row) => {
-  row[1] = `${row[1]} Rupees Only`;
+  row[1] = `${row[1]} रुपये`;
 });
 
 describe('Test Integers with options = { currency: true }', () => {
@@ -75,17 +69,17 @@ describe('Test Integers with options = { currency: true, ignoreZeroCurrency: tru
 });
 
 const testFloats = [
-  [0.0, 'Zero'],
-  [0.04, 'Zero Point Zero Four'],
-  [0.0468, 'Zero Point Zero Four Six Eight'],
-  [0.4, 'Zero Point Four'],
-  [0.63, 'Zero Point Sixty Three'],
-  [0.973, 'Zero Point Nine Hundred Seventy Three'],
-  [0.999, 'Zero Point Nine Hundred Ninety Nine'],
-  [37.06, 'Thirty Seven Point Zero Six'],
-  [37.068, 'Thirty Seven Point Zero Six Eight'],
-  [37.68, 'Thirty Seven Point Sixty Eight'],
-  [37.683, 'Thirty Seven Point Six Hundred Eighty Three'],
+  [0.0, 'शून्य'],
+  [0.04, 'शून्य दशांश शून्य चार'],
+  [0.0468, 'शून्य दशांश शून्य चार छह आठ'],
+  [0.4, 'शून्य दशांश चार'],
+  [0.63, 'शून्य दशांश तिरसठ'],
+  [0.973, 'शून्य दशांश नौ सौ तिहत्तर'],
+  [0.999, 'शून्य दशांश नौ सौ निन्यानवे'],
+  [37.06, 'सैंतीस दशांश शून्य छह'],
+  [37.068, 'सैंतीस दशांश शून्य छह आठ'],
+  [37.68, 'सैंतीस दशांश अड़सठ'],
+  [37.683, 'सैंतीस दशांश छह सौ तिरासी'],
 ];
 
 describe('Test Floats with options = {}', () => {
@@ -95,17 +89,17 @@ describe('Test Floats with options = {}', () => {
 });
 
 const testFloatsWithCurrency = [
-  [0.0, `Zero Rupees Only`],
-  [0.04, `Zero Rupees And Four Paise Only`],
-  [0.0468, `Zero Rupees And Five Paise Only`],
-  [0.4, `Zero Rupees And Forty Paise Only`],
-  [0.63, `Zero Rupees And Sixty Three Paise Only`],
-  [0.973, `Zero Rupees And Ninety Seven Paise Only`],
-  [0.999, `One Rupee Only`],
-  [37.06, `Thirty Seven Rupees And Six Paise Only`],
-  [37.068, `Thirty Seven Rupees And Seven Paise Only`],
-  [37.68, `Thirty Seven Rupees And Sixty Eight Paise Only`],
-  [37.683, `Thirty Seven Rupees And Sixty Eight Paise Only`],
+  [0.0, 'शून्य रुपये'],
+  [0.04, 'शून्य रुपये और चार पैसे'],
+  [0.0468, 'शून्य रुपये और पांच पैसे'],
+  [0.4, 'शून्य रुपये और चालीस पैसे'],
+  [0.63, 'शून्य रुपये और तिरसठ पैसे'],
+  [0.973, 'शून्य रुपये और सत्तानवे पैसे'],
+  [0.999, 'एक रुपया'],
+  [37.06, 'सैंतीस रुपये और छह पैसे'],
+  [37.068, 'सैंतीस रुपये और सात पैसे'],
+  [37.68, 'सैंतीस रुपये और अड़सठ पैसे'],
+  [37.683, 'सैंतीस रुपये और अड़सठ पैसे'],
 ];
 
 describe('Test Floats with options = { currency: true }', () => {
@@ -122,7 +116,7 @@ testFloatsWithCurrencyAndIgnoreZeroCurrency.map((row, i) => {
     return;
   }
   if (row[0] > 0 && row[0] < 1) {
-    row[1] = (row[1] as string).replace(`Zero Rupees And `, '');
+    row[1] = (row[1] as string).replace(`शून्य रुपये और `, '');
   }
 });
 
@@ -140,9 +134,9 @@ describe('Test Floats with options = { currency: true, ignoreZeroCurrency: true 
 const testFloatsWithCurrencyAndIgnoreDecimal = cloneDeep(testFloatsWithCurrency);
 testFloatsWithCurrencyAndIgnoreDecimal.map((row) => {
   if (row[0] === 0.999) {
-    row[1] = `Zero Rupees Only`;
+    row[1] = `शून्य रुपये`;
   } else {
-    row[1] = (row[1] as string).replace(new RegExp(` And [\\w ]+ Paise`), '');
+    row[1] = (row[1] as string).replace(new RegExp(` और [\u0900-\u097F ]+ पैसे`), '');
   }
 });
 
@@ -163,7 +157,7 @@ testFloatsWithCurrencyAndIgnoreZeroCurrencyAndIgnoreDecimals.map((row) => {
   if (row[0] > 0 && row[0] < 1) {
     row[1] = '';
   }
-  row[1] = (row[1] as string).replace(new RegExp(` And [\\w ]+ Paise`), '');
+  row[1] = (row[1] as string).replace(new RegExp(` और [\u0900-\u097F ]+ पैसे`), '');
 });
 
 describe('Test Floats with options = { currency: true, ignoreZeroCurrency: true, ignoreDecimal: true }', () => {
