@@ -48,6 +48,8 @@ export class ToWords {
         return require('./locales/en-US').Locale;
       case 'fa-IR':
         return require('./locales/fa-IR').Locale;
+      case 'gu-IN':
+        return require('./locales/gu-IN').Locale;
       case 'hi-IN':
         return require('./locales/hi-IN').Locale;
     }

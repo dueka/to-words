@@ -15,7 +15,6 @@ export class Locale implements LocaleInterface {
   public texts = {
     and: 'और',
     minus: 'ऋण',
-    // only: 'केवल',
     only: '',
     point: 'दशांश',
   };
