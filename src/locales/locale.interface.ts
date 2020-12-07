@@ -28,6 +28,11 @@ export interface LocaleInterface {
     value: string;
   }[];
 
+  exactWordsMapping?: {
+    number: number;
+    value: string;
+  }[];
+
   decimalLengthWordMapping?: {
     [decimalLength: number]: string;
   };

@@ -52,6 +52,8 @@ export class ToWords {
         return require('./locales/gu-IN').Locale;
       case 'hi-IN':
         return require('./locales/hi-IN').Locale;
+      case 'mr-IN':
+        return require('./locales/mr-IN').Locale;
     }
     /* eslint-enable @typescript-eslint/no-var-requires */
     throw new Error(`Unknown Locale "${this.options.localeCode}"`);
@@ -90,13 +92,14 @@ export class ToWords {
       // Extra check for isFloat to overcome 1.999 rounding off to 2
       isFloat = this.isFloat(number);
       const split = number.toString().split('.');
-      let words = this.convertInternal(Number(split[0]), options);
 
+      let words = this.convertInternal(Number(split[0]), options);
       if (Number(split[0]) === 1) {
         words += ` ${locale.currency.name}`;
       } else {
         words += locale.currency.plural ? ` ${locale.currency.plural}` : '';
       }
+
       const isNumberZero = number >= 0 && number < 1;
       const ignoreZero = options.ignoreZeroCurrency || (locale.options?.ignoreZeroInDecimals && number !== 0);
 
@@ -162,7 +165,16 @@ export class ToWords {
     }
 
     let words = '';
-    if (number <= 100 || (number < 1000 && locale.options?.namedLessThan1000)) {
+    const exactMatch = locale.exactWordsMapping?.find((elem) => {
+      return number == elem.number;
+    });
+    if (exactMatch !== undefined) {
+      words += exactMatch.value;
+      number -= match.number;
+      if (number > 0) {
+        words += ` ${this.convertInternal(number, options)}`;
+      }
+    } else if (number <= 100 || (number < 1000 && locale.options?.namedLessThan1000)) {
       words += match.value;
       number -= match.number;
       if (number > 0) {
